@@ -1,0 +1,27 @@
+{% extends "profile.html" %}
+
+{% block main_title %}Mis Bases de Datos{% endblock %}
+
+{% block databases %}
+
+    {% for database in databases %}
+
+        <div class="d-flex flex-row justify-content-center mt-5">
+            <div class="p-2">
+                <!-- mostrar nombre y el id de usuario asociado -->
+                <a href="{{ url_for('database', db=database['id']) }}" role="button" class="btn btn-lg btn-primary">
+                    {{ database['name'] }} | Propietario: {{ database['id'] }}
+                </a>
+            </div>
+            <!-- mostrar contenido clave valor -->
+            <div class="p-2">
+                {% for key, value in database['pares'].items() %}
+                    {{ key }}: {{ value }}<br>
+                {% endfor %}
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+{% endblock %}
