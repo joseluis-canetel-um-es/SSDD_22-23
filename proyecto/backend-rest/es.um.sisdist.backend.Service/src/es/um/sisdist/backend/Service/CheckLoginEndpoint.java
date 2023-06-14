@@ -26,10 +26,14 @@ public class CheckLoginEndpoint
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkUser(UserDTO uo)
     {
+    	/** modificada por kholoud **/
         Optional<User> u = impl.checkLogin(uo.getEmail(), uo.getPassword());
-        if (u.isPresent())
-            return Response.ok(UserDTOUtils.toDTO(u.get())).build();
-        else
+        if (u.isPresent()) { // si existe return ok
+        	// este metodo se modifica para incrementar visitas
+        	
+            return Response.ok(UserDTOUtils.toDTOLogin(u.get())).build();
+        }
+        else // si no existe devuelve estado de error
             return Response.status(Status.FORBIDDEN).build();
     }
 }
